@@ -42,12 +42,6 @@ const books = [
         Name: 'Modeling Inter-Campus economic systems',
         ISBN10:'2453214522'
     },
-
-
-    ,
-    ,
-    ,
-    
 ]
 let getRand = () => majorlist[Math.floor(Math.random() * majorlist.length)];
 
@@ -55,23 +49,25 @@ var options = {};
 
 var numbooks = 10;
 
-books.forEach((val) => {
-    options = {
-        method: 'POST',
-        url: 'http://localhost:8080/db/books',
-        headers:
-        {
-            'cache-control': 'no-cache',
-            authorization: 'Basic YWRtaW46Y2hhbmdlaXQ=',
-            'content-type': 'application/json'
-        },
-        body:val,
-        json: true
-    };
 
-    request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+    books.forEach((val) => {
+        options = {
+            method: 'POST',
+            url: 'http://localhost:8080/db/books',
+            headers:
+            {
+                'cache-control': 'no-cache',
+                authorization: 'Basic YWRtaW46Y2hhbmdlaXQ=',
+                'content-type': 'application/json'
+            },
+            body:val,
+            json: true
+        };
 
-        //console.log(body);
+        request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+
+            //console.log(body);
+        });
     });
-});
+

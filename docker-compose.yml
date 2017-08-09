@@ -1,0 +1,38 @@
+
+version: '2'
+
+networks:
+   backend:
+
+volumes:
+   datavolume:
+
+services:
+  restheart:
+    image: softinstigate/restheart:3.0.3
+    container_name: restheart
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+    ports:
+      - "8080:8080"
+
+  mongodb:
+    image: mongo:3.2
+    container_name: restheart-mongo
+    volumes:
+      - datavolume:/data/db
+    networks:
+      - backend
+    ports:
+      - "27017:27017"
+
+  frontend:
+    image: "node:8"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./app:/usr/src/app
+    expose:
+      - "80"

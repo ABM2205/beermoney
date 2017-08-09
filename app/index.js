@@ -6,6 +6,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 var path = require('path');
 app.set('view engine', 'ejs');
+
 app.get('/login',function(req,res) {
     res.render('login')
 })
